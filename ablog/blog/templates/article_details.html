@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}{{ post.title_tag }}{% endblock %}
 
 {% block content %}
 
 
-{% block title %}{{ post.title_tag }}{% endblock %}
+
 
 <h1>{{ post.title }}</h1>
 <small>By: {{ post.author.first_name }} 
