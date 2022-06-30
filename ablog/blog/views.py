@@ -1,6 +1,7 @@
 from turtle import title
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post
 from .forms import PostForm, EditForm
@@ -11,6 +12,8 @@ from .forms import PostForm, EditForm
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
+    ordering = ['-post_date']
+    # ordering = ['-id']
 
 class ArticleDetailView(DetailView):
     model = Post
@@ -27,3 +30,8 @@ class UpdatePostView(UpdateView):
     form_class = EditForm
     template_name = 'update_post.html'
     # fields = ['title', 'title_tag', 'body']
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'delete_post.html'
+    success_url = reverse_lazy('home')
